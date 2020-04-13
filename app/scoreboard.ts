@@ -1,6 +1,6 @@
-/// <reference path="result.ts" />
+import { Result } from './result';
 
-class Scoreboard {
+export class Scoreboard {
 
   private results: Result[] = [];
 
@@ -18,7 +18,7 @@ class Scoreboard {
       output += '</h4>';
     }
 
-    const scoresElement: HTMLElement = document.getElementById('scores');
+    const scoresElement: HTMLElement = <HTMLElement>document.getElementById('scores');
     scoresElement.innerHTML = output;
   }
 }
