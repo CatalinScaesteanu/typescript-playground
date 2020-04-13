@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "noUnusedLocals": true,
+    "outDir": "js",
+    // "outFile": "output.js",
+    "sourceMap": true,
+    "strict": true,
+    "watch": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+  },
+  "files": [
+    "app/app.ts"
+  ]
+}
