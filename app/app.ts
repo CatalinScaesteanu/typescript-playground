@@ -1,67 +1,22 @@
 /// <reference path="player.ts" />
+/// <reference path="game.ts" />
 
-const defaultPlayer: string = 'MultiMath Player';
+let newGame: Game;
 
-const startGame = () => {
-  // start game
+// add click handler to the start game button
+document.getElementById('startGame')?.addEventListener('click', () => {
+  const player: Player = new Player();
+  player.name = Utility.getInputValue('playername');
 
-  let playerName: string | undefined = getInputValue('playername');
-  logPlayer(playerName);
+  const problemCount: number = Number(Utility.getInputValue('problemCount'));
+  const factor: number = Number(Utility.getInputValue('factor'));
 
-  postScore(100, playerName);
-  postScore(-5, playerName);
-  // let msgEl = document.getElementById('messages');
-  // msgEl!.innerText = 'Welcome 2';
-}
+  newGame = new Game(player, problemCount, factor);
+  newGame.displayGame();
+});
 
-const logPlayer = (name: string = defaultPlayer) => console.log(`New game starting for player: ${name}`);
+// add click handler to the calculate score button
+document.getElementById('calculate')!.addEventListener('click', () => {
+  newGame.calculateScore();
+});
 
-const getInputValue = (elementId: string): string | undefined => {
-  const inputElement: HTMLInputElement = <HTMLInputElement>document.getElementById(elementId);
-
-  if (inputElement.value === '') {
-    return undefined;
-  } else {
-    return inputElement.value;
-  }
-}
-
-const postScore = (score: number, playerName: string = defaultPlayer): void => {
-  let logger: (value: string) => void;
-
-  if (score < 0) {
-    logger = logError;
-  } else {
-    logger = logMessage;
-  }
-
-  const scoreElement: HTMLElement | null = document.getElementById('postedScores');
-  scoreElement!.innerText = `${score} - ${playerName}`;
-
-  logger(`Score ${score}`);
-}
-
-document.getElementById('startGame')!.addEventListener('click', startGame);
-
-const logMessage = (message: string): void => console.log(message);
-logMessage('Welcome to MultiMath');
-
-function logError(err: string): void {
-  console.error(err);
-}
-
-// let myResult: Result = {
-//   playerName: 'Marie',
-//   score: 5,
-//   problemCount: 5,
-//   factor: 7
-// };
-
-// let player: Person = {
-//   name: 'Daniel',
-//   formatName: () => 'Dan'
-// }
-
-const firstPlayer: Player = new Player();
-firstPlayer.name = 'Lanier';
-console.log(firstPlayer.formatName());
